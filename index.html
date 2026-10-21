@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pricing Plans</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f3f4ff;
+    color: #222;
+    text-align: center;
+    padding: 40px 15px;
+}
+
+h1 {
+    color: #4438ca;
+    font-size: 36px;
+}
+
+.subtitle {
+    color: #666;
+    margin-bottom: 25px;
+}
+
+.toggle {
+    margin: 25px;
+    font-weight: bold;
+}
+
+button {
+    cursor: pointer;
+}
+
+#billing {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 20px;
+    background: #4438ca;
+    color: white;
+    font-weight: bold;
+}
+
+.cards {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    flex-wrap: wrap;
+    gap: 25px;
+    max-width: 1050px;
+    margin: 30px auto;
+}
+
+.card {
+    position: relative;
+    background: white;
+    width: 290px;
+    padding: 30px 20px;
+    border-radius: 18px;
+    box-shadow: 0 5px 20px #00000012;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 15px 30px #4438ca30;
+}
+
+.card h2 {
+    color: #4438ca;
+}
+
+.price {
+    font-size: 38px;
+    font-weight: bold;
+    margin: 20px 0;
+}
+
+.price span {
+    font-size: 15px;
+    color: #777;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    line-height: 2.5;
+}
+
+.choose {
+    background: #4438ca;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    width: 100%;
+    font-size: 16px;
+    transition: background 0.3s;
+}
+
+.choose:hover {
+    background: #292080;
+}
+
+.popular {
+    border: 2px solid #4438ca;
+}
+
+.badge {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #4438ca;
+    color: white;
+    padding: 7px 18px;
+    border-radius: 20px;
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+footer {
+    margin-top: 35px;
+    color: #777;
+}
+
+@media (max-width: 600px) {
+    h1 {
+        font-size: 28px;
+    }
+
+    .cards {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card {
+        width: 100%;
+        max-width: 340px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<h1>Choose Your Plan</h1>
+<p class="subtitle">Simple pricing for everyone. Upgrade as you grow!</p>
+
+<div class="toggle">
+    <span id="monthlyLabel">Monthly</span>
+    &nbsp;
+    <button id="billing" onclick="toggleBilling()">Switch to Yearly</button>
+    &nbsp;
+    <span id="yearlyLabel">Yearly</span>
+</div>
+
+<div class="cards">
+
+    <div class="card">
+        <h2>Basic</h2>
+        <p>Perfect for beginners</p>
+        <div class="price" data-month="9" data-year="90">$9<span>/month</span></div>
+        <ul>
+            <li>✔ 1 Project</li>
+            <li>✔ Basic Support</li>
+            <li>✔ 5 GB Storage</li>
+        </ul>
+        <button class="choose" onclick="selectPlan('Basic')">Choose Plan</button>
+    </div>
+
+    <div class="card popular">
+        <div class="badge">POPULAR</div>
+        <h2>Pro</h2>
+        <p>Best for professionals</p>
+        <div class="price" data-month="19" data-year="190">$19<span>/month</span></div>
+        <ul>
+            <li>✔ 10 Projects</li>
+            <li>✔ Priority Support</li>
+            <li>✔ 50 GB Storage</li>
+        </ul>
+        <button class="choose" onclick="selectPlan('Pro')">Choose Plan</button>
+    </div>
+
+    <div class="card">
+        <div class="badge">BEST VALUE</div>
+        <h2>Premium</h2>
+        <p>For growing businesses</p>
+        <div class="price" data-month="39" data-year="390">$39<span>/month</span></div>
+        <ul>
+            <li>✔ Unlimited Projects</li>
+            <li>✔ 24/7 Support</li>
+            <li>✔ 200 GB Storage</li>
+        </ul>
+        <button class="choose" onclick="selectPlan('Premium')">Choose Plan</button>
+    </div>
+
+</div>
+
+<footer>
+    <p>© 2026 Pricing Plans | Designed with HTML, CSS & JavaScript</p>
+</footer>
+
+<script>
+let yearly = false;
+
+function toggleBilling() {
+    yearly = !yearly;
+
+    document.querySelectorAll(".price").forEach(price => {
+        let amount = yearly ? price.dataset.year : price.dataset.month;
+        let period = yearly ? "/year" : "/month";
+
+        price.innerHTML = "$" + amount +
+            "<span>" + period + "</span>";
+    });
+
+    document.getElementById("billing").textContent =
+        yearly ? "Switch to Monthly" : "Switch to Yearly";
+}
+
+function selectPlan(plan) {
+    alert("You selected the " + plan + " plan!");
+}
+</script>
+
+</body>
+</html>
